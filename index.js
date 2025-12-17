@@ -2,16 +2,16 @@ const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const fs = require("fs");
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
-// Load commands
+// جمع كل الأوامر من نفس المجلد
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./').filter(file => file.endsWith('.js') && file !== 'index.js' && file !== 'package.json');
 
 for(const file of commandFiles){
-    const command = require(`./commands/${file}`);
+    const command = require(`./${file}`);
     client.commands.set(command.name, command);
 }
 
-// Event listener
+// حدث استقبال الرسائل
 client.on("messageCreate", async message => {
     if(message.author.bot) return;
     if(!message.content.startsWith("!")) return;
@@ -30,5 +30,5 @@ client.on("messageCreate", async message => {
     }
 });
 
-// Login
+// تسجيل الدخول
 client.login(process.env.BOT_TOKEN);
