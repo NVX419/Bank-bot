@@ -1,0 +1,13 @@
+{
+  "name": "discord-bank-bot",
+  "version": "1.0.0",
+  "description": "A simple bank bot for Discord",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "fs": "^0.0.1-security"
+  }
+}
